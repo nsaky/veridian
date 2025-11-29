@@ -1,0 +1,14 @@
+# Exclude unnecessary files from deployment
+node_modules
+venv
+.env
+.git
+*.pyc
+__pycache__
+.DS_Store
+*.md
+!README.md
+setup.sh
+start-backend.sh
+start-veridian.sh
+.gemini
