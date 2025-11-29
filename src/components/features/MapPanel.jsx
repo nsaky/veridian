@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import mapboxgl from 'mapbox-gl'
 import { useMapContext } from '../../context/MapContext'
 import { getProperties } from '../../lib/api'
@@ -6,6 +7,7 @@ import { getProperties } from '../../lib/api'
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoidmVyaWRpYW4iLCJhIjoiY20zeTB3ZjNrMDEyZzJrcHlyNnVxNGV1eSJ9.placeholder'
 
 export default function MapPanel() {
+    const navigate = useNavigate()
     const mapContainer = useRef(null)
     const map = useRef(null)
     const markers = useRef([])
@@ -178,8 +180,10 @@ export default function MapPanel() {
                 }
 
                 if (memoBtn) {
-                    memoBtn.addEventListener('click', () => {
-                        window.location.href = `/property/${property.id}`
+                    memoBtn.addEventListener('click', (e) => {
+                        e.preventDefault()
+                        popup.remove()
+                        navigate(`/property/${property.id}`)
                     })
                 }
             })
